@@ -146,7 +146,7 @@ function App() {
   }
 
   return (
-    <div className="min-vh-100 bg-light">
+    <div className="min-vh-100">
       <Header stats={stats} onExport={handleExport} onImport={handleImportClick} />
       <input ref={fileInputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={handleImportFile} />
       <div className="container py-4">
@@ -167,7 +167,7 @@ function App() {
           </div>
         </div>
       </div>
-      <ToastContainer position="bottom-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={3000} theme="dark" />
     </div>
   )
 }

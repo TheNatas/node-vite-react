@@ -18,6 +18,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-bs-theme', theme);
+    document.body.setAttribute('data-bs-theme', theme);
+    
+    // Adicionar classes de background e texto
+    if (theme === 'dark') {
+      document.body.classList.add('bg-dark', 'text-light');
+      document.body.classList.remove('bg-light', 'text-dark');
+    } else {
+      document.body.classList.add('bg-light', 'text-dark');
+      document.body.classList.remove('bg-dark', 'text-light');
+    }
+    
     localStorage.setItem('theme', theme);
   }, [theme]);
 
