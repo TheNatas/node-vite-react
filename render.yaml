@@ -1,0 +1,36 @@
+services:
+  # Backend API
+  - type: web
+    name: todo-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: JWT_SECRET
+        generateValue: true
+    disk:
+      name: leveldb-data
+      mountPath: /opt/render/project/backend/data
+      sizeGB: 1
+
+  # Frontend Static Site
+  - type: web
+    name: todo-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://todo-backend.onrender.com

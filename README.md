@@ -28,6 +28,7 @@ Este é um projeto full-stack de gerenciamento de tarefas (TODO list) que atende
 - **TypeScript** - Tipagem estática
 - **Express** - Framework web
 - **LevelDB** - Banco de dados NoSQL local
+- **JWT + Bcrypt** - Autenticação segura
 - **Jest** - Framework de testes (88.67% cobertura)
 - **Express Validator** - Validação de requisições
 
@@ -38,7 +39,7 @@ Este é um projeto full-stack de gerenciamento de tarefas (TODO list) que atende
 - **TypeScript** - Tipagem estática
 - **Axios** - Cliente HTTP
 - **React Toastify** - Notificações
-- **Vitest** - Framework de testes (configurado)
+- **Vitest** - Framework de testes (24 testes, 100% componentes)
 
 ## 📁 Estrutura do Projeto
 
@@ -66,12 +67,26 @@ node-vite-react/
 cd backend
 npm install
 cp .env.example .env
+# Edite o .env e configure JWT_SECRET
 npm run dev
 ```
 
 O servidor estará disponível em `http://localhost:3001`
 
-Para mais detalhes sobre o backend, veja [backend/README.md](backend/README.md)
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+A aplicação estará disponível em `http://localhost:3000`
+
+Para mais detalhes, veja:
+- [Backend README](backend/README.md)
+- [Autenticação](AUTHENTICATION.md)
+- [Deploy](DEPLOYMENT.md)
 
 ## 🧪 Testes
 
@@ -85,6 +100,14 @@ Cobertura atual: **88.67%**
 
 ## 📡 API Endpoints
 
+### Autenticação
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| POST | `/api/auth/register` | Criar nova conta |
+| POST | `/api/auth/login` | Fazer login |
+| GET | `/api/auth/me` | Dados do usuário (protegido) |
+
+### Tarefas
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
 | GET | `/api/health` | Status da API |
@@ -100,21 +123,23 @@ Cobertura atual: **88.67%**
 
 ### Backend ✅
 - [x] CRUD completo de tarefas
+- [x] Sistema de autenticação (JWT + Bcrypt)
 - [x] Filtros por status (todas, pendentes, concluídas)
 - [x] Busca por título e descrição
 - [x] Persistência com LevelDB
 - [x] Validação de dados
 - [x] Tratamento de erros
-- [x] Testes unitários e de integração
+- [x] Testes unitários e de integração (88.67% cobertura)
 - [x] API RESTful documentada
 
-### Frontend 🚧
-- [ ] Interface com React + Bootstrap
-- [ ] Formulários de criação e edição
-- [ ] Filtros e busca
-- [ ] Tema claro/escuro
-- [ ] Importar/Exportar dados
-- [ ] Testes de componentes
+### Frontend ✅
+- [x] Interface com React + Bootstrap
+- [x] Sistema de login e cadastro
+- [x] Formulários de criação e edição
+- [x] Filtros e busca
+- [x] Tema claro/escuro
+- [x] Importar/Exportar dados
+- [x] Testes de componentes (24 testes, 100% componentes)
 
 ## 📝 Commits Regulares
 
