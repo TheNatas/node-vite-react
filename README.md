@@ -1,6 +1,12 @@
-# TODO App - Lista de Tarefas
+# TODO List Application 📝
 
-Aplicação completa de lista de tarefas desenvolvida com Node.js, TypeScript, React e LevelDB.
+Aplicação full-stack de lista de tarefas desenvolvida com Node.js, TypeScript, React e LevelDB.
+
+![Status](https://img.shields.io/badge/status-completo-brightgreen)
+![Backend](https://img.shields.io/badge/backend-Node.js%20%2B%20TypeScript-blue)
+![Frontend](https://img.shields.io/badge/frontend-React%20%2B%20TypeScript-61dafb)
+![Tests](https://img.shields.io/badge/tests-49%20passing-success)
+![Coverage](https://img.shields.io/badge/coverage-88.67%25-brightgreen)
 
 ## 📋 Sobre o Projeto
 
@@ -22,14 +28,17 @@ Este é um projeto full-stack de gerenciamento de tarefas (TODO list) que atende
 - **TypeScript** - Tipagem estática
 - **Express** - Framework web
 - **LevelDB** - Banco de dados NoSQL local
-- **Jest** - Framework de testes
+- **Jest** - Framework de testes (88.67% cobertura)
 - **Express Validator** - Validação de requisições
 
-### Frontend (Em desenvolvimento)
-- **Vite** - Build tool
-- **React** - Biblioteca UI
-- **Bootstrap** - Framework CSS
+### Frontend
+- **Vite 7** - Build tool
+- **React 19** - Biblioteca UI
+- **Bootstrap 5** - Framework CSS responsivo
 - **TypeScript** - Tipagem estática
+- **Axios** - Cliente HTTP
+- **React Toastify** - Notificações
+- **Vitest** - Framework de testes (configurado)
 
 ## 📁 Estrutura do Projeto
 
