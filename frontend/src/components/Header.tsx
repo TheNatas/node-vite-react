@@ -1,4 +1,5 @@
 import { useTheme } from '../hooks/useTheme';
+import { useAuth } from '../context/AuthContext';
 import type { TaskStats } from '../types/task';
 
 interface HeaderProps {
@@ -9,19 +10,25 @@ interface HeaderProps {
 
 export function Header({ stats, onExport, onImport }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
 
   return (
     <header className="bg-primary text-white shadow-sm">
       <div className="container py-4">
         <div className="row align-items-center">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <h1 className="h3 mb-0">
               <i className="bi bi-check2-square me-2"></i>
               TODO App
             </h1>
+            {user && (
+              <small className="text-white-50 d-block mt-1">
+                Olá, {user.name}
+              </small>
+            )}
           </div>
           
-          <div className="col-md-4 text-center">
+          <div className="col-md-5 text-center">
             <div className="d-flex justify-content-center gap-3 mt-3 mt-md-0">
               <div className="text-center">
                 <div className="fs-4 fw-bold">{stats.total}</div>
@@ -60,6 +67,13 @@ export function Header({ stats, onExport, onImport }: HeaderProps) {
                 title={`Alternar para tema ${theme === 'light' ? 'escuro' : 'claro'}`}
               >
                 <i className={`bi bi-${theme === 'light' ? 'moon' : 'sun'}`}></i>
+              </button>
+              <button
+                className="btn btn-outline-light"
+                onClick={logout}
+                title="Sair"
+              >
+                <i className="bi bi-box-arrow-right"></i>
               </button>
             </div>
           </div>

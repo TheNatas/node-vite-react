@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import taskRoutes from './task.routes';
+import authRoutes from './auth.routes';
 
 const router = Router();
 
@@ -13,6 +14,8 @@ router.get('/health', (_req, res) => {
 });
 
 // API routes
+router.use('/auth', authRoutes);
+router.use('/tasks', taskRoutes);
 router.use('/tasks', taskRoutes);
 
 export default router;

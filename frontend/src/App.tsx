@@ -5,11 +5,16 @@ import { TaskForm } from './components/TaskForm'
 import { FilterButtons } from './components/FilterButtons'
 import { SearchBar } from './components/SearchBar'
 import { TaskList } from './components/TaskList'
+import Login from './components/Login'
+import Register from './components/Register'
+import { useAuth } from './context/AuthContext'
 import { taskService } from './services/taskService'
 import type { Task, CreateTaskDTO, UpdateTaskDTO, TaskFilter, TaskStats } from './types/task'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
+  const { isAuthenticated, loading: authLoading } = useAuth()
+  const [showRegister, setShowRegister] = useState(false)
   const [tasks, setTasks] = useState<Task[]>([])
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([])
   const [filter, setFilter] = useState<TaskFilter>('all')
@@ -17,18 +22,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [stats, setStats] = useState<TaskStats>({ total: 0, completed: 0, pending: 0 })
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    loadTasks()
-  }, [])
-
-  useEffect(() => {
-    filterTasks()
-  }, [tasks, filter, searchQuery])
-
-  useEffect(() => {
-    updateStats()
-  }, [tasks])
 
   const loadTasks = async () => {
     setIsLoading(true)
@@ -43,29 +36,41 @@ function App() {
     }
   }
 
-  const filterTasks = () => {
-    let filtered = [...tasks]
-    if (filter === 'pending') {
-      filtered = filtered.filter((task) => !task.completed)
-    } else if (filter === 'completed') {
-      filtered = filtered.filter((task) => task.completed)
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadTasks()
     }
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
-      filtered = filtered.filter(
-        (task) =>
-          task.title.toLowerCase().includes(query) ||
-          task.description.toLowerCase().includes(query)
-      )
-    }
-    setFilteredTasks(filtered)
-  }
+  }, [isAuthenticated])
 
-  const updateStats = () => {
-    const completed = tasks.filter((task) => task.completed).length
-    const pending = tasks.filter((task) => !task.completed).length
-    setStats({ total: tasks.length, completed, pending })
-  }
+  useEffect(() => {
+    const filterTasks = () => {
+      let filtered = [...tasks]
+      if (filter === 'pending') {
+        filtered = filtered.filter((task) => !task.completed)
+      } else if (filter === 'completed') {
+        filtered = filtered.filter((task) => task.completed)
+      }
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase()
+        filtered = filtered.filter(
+          (task) =>
+            task.title.toLowerCase().includes(query) ||
+            task.description.toLowerCase().includes(query)
+        )
+      }
+      setFilteredTasks(filtered)
+    }
+    filterTasks()
+  }, [tasks, filter, searchQuery])
+
+  useEffect(() => {
+    const updateStats = () => {
+      const completed = tasks.filter((task) => task.completed).length
+      const pending = tasks.filter((task) => !task.completed).length
+      setStats({ total: tasks.length, completed, pending })
+    }
+    updateStats()
+  }, [tasks])
 
   const handleCreateTask = async (data: CreateTaskDTO) => {
     try {
@@ -143,6 +148,29 @@ function App() {
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = ''
     }
+  }
+
+  if (authLoading) {
+    return (
+      <div className="min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Carregando...</span>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        {showRegister ? (
+          <Register onToggleForm={() => setShowRegister(false)} />
+        ) : (
+          <Login onToggleForm={() => setShowRegister(true)} />
+        )}
+        <ToastContainer position="bottom-right" autoClose={3000} theme="dark" />
+      </>
+    )
   }
 
   return (
