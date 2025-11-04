@@ -69,7 +69,7 @@ cp .env.example .env
 npm run dev
 ```
 
-O servidor estará disponível em `http://localhost:3000`
+O servidor estará disponível em `http://localhost:3001`
 
 Para mais detalhes sobre o backend, veja [backend/README.md](backend/README.md)
 

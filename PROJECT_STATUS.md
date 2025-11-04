@@ -51,10 +51,11 @@ node-vite-react/
 ### ✅ Requisitos Técnicos
 - [x] **Backend**: Node.js, TypeScript, Express, LevelDB
 - [x] **Frontend**: Vite, React 19, TypeScript, Bootstrap 5
-- [x] **Testes**: 49 testes no backend (88.67% cobertura)
+- [x] **Testes Backend**: 49 testes (88.67% cobertura)
+- [x] **Testes Frontend**: 24 testes (componentes principais)
 - [x] **Persistência**: LevelDB com banco local
-- [x] **Porta**: Backend na porta 3000, frontend com proxy configurado
-- [x] **Commits Regulares**: 5 commits feitos
+- [x] **Porta**: Frontend na porta 3000 (requisito), backend na porta 3001, proxy configurado
+- [x] **Commits Regulares**: 9+ commits feitos
   1. Initial commit: Estrutura básica
   2. feat: implementar database service e task repository com LevelDB
   3. feat: adicionar controllers, routes e middleware
@@ -72,7 +73,7 @@ npm install
 npm run build
 npm start
 ```
-**Servidor rodando em:** http://localhost:3000
+**Servidor rodando em:** http://localhost:3001
 
 ### Frontend
 ```bash
@@ -80,11 +81,17 @@ cd frontend
 npm install
 npm run dev
 ```
-**Interface rodando em:** http://localhost:5173
+**Interface rodando em:** http://localhost:3000
 
 ### Testes Backend
 ```bash
 cd backend
+npm test
+```
+
+### Testes Frontend
+```bash
+cd frontend
 npm test
 ```
 
@@ -144,6 +151,19 @@ Coverage:    88.67% statements
 - ✅ `database.service.ts` - CRUD do LevelDB
 - ✅ `task.repository.ts` - Operações de tarefas
 - ✅ API Integration - Endpoints REST completos
+
+### Frontend
+```
+Test Suites: 5 passed, 5 total
+Tests:       24 passed, 24 total
+```
+
+**Componentes Testados:**
+- ✅ `TaskForm.tsx` - 6 testes (validações e submissão)
+- ✅ `TaskItem.tsx` - 6 testes (renderização e ações)
+- ✅ `TaskList.tsx` - 4 testes (lista e estados)
+- ✅ `FilterButtons.tsx` - 4 testes (filtros ativos)
+- ✅ `SearchBar.tsx` - 4 testes (busca e limpeza)
 
 ---
 
@@ -232,6 +252,6 @@ Desenvolvido como projeto full-stack de lista de tarefas com Node.js, React e Ty
 - Commits regulares realizados
 
 **Para rodar a aplicação completa:**
-1. Terminal 1: `cd backend && npm start` (porta 3000)
-2. Terminal 2: `cd frontend && npm run dev` (porta 5173)
-3. Acessar: http://localhost:5173
+1. Terminal 1: `cd backend && npm start` (porta 3001)
+2. Terminal 2: `cd frontend && npm run dev` (porta 3000)
+3. Acessar: http://localhost:3000

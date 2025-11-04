@@ -9,7 +9,7 @@ npm install          # (se ainda não instalou)
 npm run build       # Compilar TypeScript
 npm start           # Iniciar servidor
 ```
-✅ Backend rodando em: **http://localhost:3000**
+✅ Backend rodando em: **http://localhost:3001**
 
 ### 2️⃣ Frontend (Terminal 2)
 ```bash
@@ -17,7 +17,7 @@ cd frontend
 npm install          # (se ainda não instalou)
 npm run dev         # Iniciar dev server
 ```
-✅ Frontend rodando em: **http://localhost:5173**
+✅ Frontend rodando em: **http://localhost:3000**
 
 ---
 
@@ -98,15 +98,15 @@ npm run preview            # Preview do build
 
 ### Backend não inicia
 ```bash
-# Verificar se a porta 3000 está livre
-lsof -i :3000
+# Verificar se a porta 3001 está livre
+lsof -i :3001
 
 # Se estiver em uso, matar o processo
 kill -9 <PID>
 ```
 
 ### Frontend não conecta
-1. Verificar se backend está rodando em `localhost:3000`
+1. Verificar se backend está rodando em `localhost:3001`
 2. Verificar console do navegador para erros
 3. Verificar configuração de proxy no `vite.config.ts`
 
